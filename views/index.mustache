@@ -5,50 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>WordGame</title>
+    <link rel="stylesheet" type="text/CSS" href="/main.css">
 </head>
 
 <body>
+    <div id="bodyWrapper">
+        <div id="header">
+            <h1 id='title'>Want to play a word Game?</h1>
+        </div>
+        <div id="buttonWrapper">
+            <a href="/user/easy">
+                <div class="diffButton" type="submit" name="easy" value="Easy"></div>
+            </a>
+            <a href="/user/normal">
+                <div class="diffButton" type="submit" name="medium" value="Normal"></div>
+            </a>
+            <a href="/user/hard">
+                <div class="diffButton" type="submit" name="hard" value="Hard"></div>
+            </a>
+        </div>
 
-    <section class="wrapper">
-
-        <div class="container">
-            <div class="guess"></div>
-            <div id="top">
-                <div id="playarea">
-
-                    <input type="text" name="guessLetter" placeholder="Enter a letter" maxlength="1" size "1" autofocus>
-                    <input type="submit" value=""><span id="lose">&nbsp;&nbsp;</span>
-                </div>
-            </div>
-            <br>
-            <div id="bottom">
-                <div class="wrapper-postit">
-                    <div class="postit">Letters guessed<br><br> &nbsp;
-                    </div>
-                </div>
-                <div id="right">
-                    <div id="wrapper-mode" class="card">
-                        Game mode:<br><br>
-                        <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
-                        <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
-                        <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
-                    </div>
-                    <p id="message"></p>
-                </div>
-                <div>
-                    </form>
-                </div>
-            </div>
-
-
-    </section>
-
-
-
-
+    </div>
 
 </body>
-
-</html>

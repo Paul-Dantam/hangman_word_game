@@ -8,6 +8,7 @@ const users = require("./data");
 const checkAuth = require("./middlewares/checkAuth");
 const userParser = require("./middlewares/userParser");
 const sessionConfig = require("./sessionConfig");
+const gameBuild = require("./middlewares/gameBuild");
 const indexRoutes = require("./routes/indexRoutes");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -17,6 +18,7 @@ const words = fs
   .readFileSync("/usr/share/dict/words", "utf-8")
   .toLowerCase()
   .split("\n");
+
 const port = process.env.PORT || 8000;
 
 app.engine("mustache", mustacheExpress());
@@ -28,6 +30,7 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sessionConfig));
 app.use(userParser);
+app.use(gameBuild);
 
 //routes
 app.use("/", indexRoutes);
