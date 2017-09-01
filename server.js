@@ -5,6 +5,7 @@ const logger = require("morgan");
 const mustacheExpress = require("mustache-express");
 const path = require("path");
 const users = require("./data");
+
 const checkAuth = require("./middlewares/checkAuth");
 const userParser = require("./middlewares/userParser");
 const sessionConfig = require("./sessionConfig");
