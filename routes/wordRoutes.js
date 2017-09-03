@@ -10,15 +10,9 @@ const words = fs
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function lossResponse() {
-  let response = window.confirm("Do you want to play again?");
-  if (response === true) res.redirect("/words/newgame");
-  else res.redirect("/");
-}
 
 wordRoutes.get("/newgame", (req, res) => {
   const randomWord = words[getRandomInt(0, words.length - 1)];
-  console.log("randomWord: ", randomWord);
   req.session.word = randomWord;
   let displayArray = [];
   for (let i = 0; i < randomWord.length; i++) {
@@ -28,6 +22,7 @@ wordRoutes.get("/newgame", (req, res) => {
   req.session.wrongGuesses = [];
   req.session.correctGuesses = [];
   req.session.turns = 8;
+  req.session.playing = true;
   req.session.msg = "Good Luck, you can miss " + req.session.turns + " guesses";
   res.redirect("/");
 });
@@ -35,7 +30,10 @@ wordRoutes.get("/newgame", (req, res) => {
 wordRoutes.post("/guess", (req, res) => {
   let guessLetter = req.body.letter.toUpperCase();
   let word = req.session.word;
-  console.log(req.session.wrongGuesses, req.session.correctGuesses);
+
+  if ((req.session.playing = false)) {
+    return res.redirect("/");
+  }
 
   if (
     req.session.wrongGuesses.indexOf(guessLetter) > -1 ||
@@ -49,13 +47,13 @@ wordRoutes.post("/guess", (req, res) => {
   } else if (word.indexOf(guessLetter) < 0) {
     req.session.turns -= 1;
     if (req.session.turns < 1) {
-      req.session.msg = "no more turns. Game Over";
-    }
-    req.session.msg = "Wrong, you have " + req.session.turns + " turns left";
-    req.session.wrongGuesses.push(guessLetter);
-    return res.redirect("/");
-    if (req.session.turns < 1) {
-      req.session.msg = "no more turns. Game Over";
+      req.session.playing = false;
+      req.session.msg =
+        "The word was " + req.session.word + ". Click new game to play again!";
+      return res.redirect("/");
+    } else {
+      req.session.msg = "Wrong, you have " + req.session.turns + " turns left";
+      req.session.wrongGuesses.push(guessLetter);
       return res.redirect("/");
     }
   } else
@@ -67,8 +65,13 @@ wordRoutes.post("/guess", (req, res) => {
         if (req.session.correctGuesses.indexOf(guessLetter) < 0) {
           req.session.correctGuesses.push(guessLetter);
         }
+        if (req.session.display.join("") === req.session.word) {
+          req.session.playing = false;
+          req.session.msg = "You win! Click new game to play again.";
+        }
       }
     }
+
   return res.redirect("/");
 });
 

@@ -1,4 +1,5 @@
 const express = require("express");
+const expressValidator = require("express-validator");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const logger = require("morgan");
@@ -22,9 +23,9 @@ app.set("views", "./views");
 app.set("view engine", "mustache");
 
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sessionConfig));
+app.use(expressValidator());
 
 //routes
 app.use("/", indexRoutes);

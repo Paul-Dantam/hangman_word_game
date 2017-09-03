@@ -25,7 +25,7 @@
 
         <form action="/word/guess" class="guessForm" method="POST">
 
-            <input type="text" name="letter" maxlength="1" placeholder="enter a letter">
+            <input type="text" name="letter" pattern="[A-Za-z]{1}" maxlength="1" placeholder="enter a letter">
             <button type="submit">Guess</button>
 
         </form>
