@@ -5,27 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>WordGame</title>
-    <link rel="stylesheet" type="text/CSS" href="/main.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Word Game!</title>
 </head>
 
 <body>
-    <div id="bodyWrapper">
-        <div id="header">
-            <h1 id='title'>Want to play a word Game?</h1>
-        </div>
-        <div id="buttonWrapper">
-            <a href="/user/easy">
-                <div class="diffButton" type="submit" name="easy" value="Easy"></div>
-            </a>
-            <a href="/user/normal">
-                <div class="diffButton" type="submit" name="medium" value="Normal"></div>
-            </a>
-            <a href="/user/hard">
-                <div class="diffButton" type="submit" name="hard" value="Hard"></div>
-            </a>
-        </div>
 
+
+    <div>
+        <h1>New Game</h1>
+        <form action="/word/newgame" method="get">
+            <button type="submit">new game</button></form>
     </div>
 
+    {{#word}}
+    <h2>{{#msg}}{{.}}{{/msg}}</h2>
+
+    <div class="guessArea">
+        <form action="/word/guess" class="guessForm" method="POST">
+
+            <input type="text" name="letter" pattern="[A-Za-z]{1}" maxlength="1" placeholder="enter a letter">
+            <button type="submit">Guess</button>
+
+        </form>
+    </div>
+
+    {{#turns}}
+    <div class="turns"></div>
+    {{/turns}}
+
+    <div class="display">
+        <h3><span>{{#display}}{{.}}{{/display}}</h3></div>
+
+
+        <div class="wrong">Wrong Guesses: {{#wrongGuesses}} {{.}} {{/wrongGuesses}}
+            {{^wrongGuesses}} {{/wrongGuesses}}
+        </div>
+        <div class="correct">Correct Guesses: {{#correctGuesses}} {{.}} {{/correctGuesses}}
+            {{^correctGuesses}}{{/correctGuesses}}
+        </div>
+
+
+{{/word}}
 </body>
+
+</html>

@@ -1,7 +1,6 @@
 {
   "name": "weeklyproject",
   "version": "1.0.0",
-  "description": "",
   "main": "data.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +12,10 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
+    "express-validator": "^4.1.1",
     "morgan": "^1.8.2",
     "mustache-express": "^1.2.5"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
