@@ -45,7 +45,7 @@ wordRoutes.post("/guess", (req, res) => {
       " turns left.";
     return res.redirect("/");
   } else if (word.indexOf(guessLetter) < 0) {
-    req.session.turns -= 1;
+    req.session.turns--;
     if (req.session.turns < 1) {
       req.session.playing = false;
       req.session.msg =
